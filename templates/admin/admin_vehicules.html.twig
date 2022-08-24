@@ -16,7 +16,7 @@
     {% for message in app.flashes('success') %}
         <div class="alert alert-success text-center">{{ message }}</div>
     {% endfor %}
-    
+
     <div>
         <table class="table">
             <thead>
@@ -45,7 +45,7 @@
                             <a href="{{ path('admin_edit_vehicule', {id: vehicule.id}) }}" class="text-warning"><i class="fa-solid fa-pen"></i></a>
                         </td>
                         <td>
-                            <a href="#" class="text-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="{{ path('admin_delete_vehicule', {id: vehicule.id}) }}" class="text-danger"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
