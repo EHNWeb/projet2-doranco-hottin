@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\VehiculeRepository;
+use App\Repository\MembreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=VehiculeRepository::class)
+ * @ORM\Entity(repositoryClass=MembreRepository::class)
  */
-class Vehicule
+class Membre
 {
     /**
      * @ORM\Id
@@ -20,34 +20,39 @@ class Vehicule
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(type="string", length=20)
      */
-    private $titre;
+    private $pseudo;
+
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $mdp;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $prenom;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $marque;
+    private $email;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=1)
      */
-    private $modele;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="string", length=200)
-     */
-    private $photo;
+    private $civilite;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $prix_journalier;
+    private $statut;
 
     /**
      * @ORM\Column(type="datetime")
@@ -55,7 +60,7 @@ class Vehicule
     private $date_enregistrement;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="id_vehicule", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="id_membre", orphanRemoval=true)
      */
     private $commandes;
 
@@ -69,74 +74,86 @@ class Vehicule
         return $this->id;
     }
 
-    public function getTitre(): ?string
+    public function getPseudo(): ?string
     {
-        return $this->titre;
+        return $this->pseudo;
     }
 
-    public function setTitre(string $titre): self
+    public function setPseudo(string $pseudo): self
     {
-        $this->titre = $titre;
+        $this->pseudo = $pseudo;
 
         return $this;
     }
 
-    public function getMarque(): ?string
+    public function getMdp(): ?string
     {
-        return $this->marque;
+        return $this->mdp;
     }
 
-    public function setMarque(string $marque): self
+    public function setMdp(string $mdp): self
     {
-        $this->marque = $marque;
+        $this->mdp = $mdp;
 
         return $this;
     }
 
-    public function getModele(): ?string
+    public function getNom(): ?string
     {
-        return $this->modele;
+        return $this->nom;
     }
 
-    public function setModele(string $modele): self
+    public function setNom(string $nom): self
     {
-        $this->modele = $modele;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->description;
+        return $this->prenom;
     }
 
-    public function setDescription(string $description): self
+    public function setPrenom(string $prenom): self
     {
-        $this->description = $description;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getPhoto(): ?string
+    public function getEmail(): ?string
     {
-        return $this->photo;
+        return $this->email;
     }
 
-    public function setPhoto(string $photo): self
+    public function setEmail(string $email): self
     {
-        $this->photo = $photo;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPrixJournalier(): ?int
+    public function getCivilite(): ?string
     {
-        return $this->prix_journalier;
+        return $this->civilite;
     }
 
-    public function setPrixJournalier(int $prix_journalier): self
+    public function setCivilite(string $civilite): self
     {
-        $this->prix_journalier = $prix_journalier;
+        $this->civilite = $civilite;
+
+        return $this;
+    }
+
+    public function getStatut(): ?int
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(int $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }
@@ -165,7 +182,7 @@ class Vehicule
     {
         if (!$this->commandes->contains($commande)) {
             $this->commandes[] = $commande;
-            $commande->setIdVehicule($this);
+            $commande->setIdMembre($this);
         }
 
         return $this;
@@ -175,11 +192,12 @@ class Vehicule
     {
         if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)
-            if ($commande->getIdVehicule() === $this) {
-                $commande->setIdVehicule(null);
+            if ($commande->getIdMembre() === $this) {
+                $commande->setIdMembre(null);
             }
         }
 
         return $this;
     }
+
 }
