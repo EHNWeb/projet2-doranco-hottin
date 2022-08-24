@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Vehicule;
+use App\Form\VehiculeType;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
 {
@@ -33,6 +35,42 @@ class AdminController extends AbstractController
         return $this->render('admin/admin_vehicules.html.twig', [
             'vehicules' => $vehicules,
             'colonnes' => $chapmsTableVehicule
+        ]);
+    }
+
+    /**
+     * @Route("/admin/vehicule/new", name="admin_new_vehicule")
+     * @Route("/admin/vehicule/edit/{id}", name="admin_edit_vehicule")
+     */
+    // La classe REQUEST contient les données véhiculées par les super globales ($_POST, $_GET, ...)
+    public function vehicule_form(Request $superGlobals, EntityManagerInterface $manager, Vehicule $vehicule = null)
+    {
+        // L'objet VEHICULE recevra les données du formulaire
+        if (!$vehicule) {
+            $vehicule = new Vehicule();
+            $vehicule->setDateEnregistrement(new \DateTime());
+            $messageForm = "Le véhicule a bien été crée !";
+        } else {
+            $messageForm = "Le véhicule n° " . $vehicule->getId() . " a bien été modifié !";
+        }
+
+        // CREATEFORM permet de récupérer un formulaire existant #}
+        $form = $this->createForm(VehiculeType::class, $vehicule);
+
+        // HandleRequest permet d'insérer les données du formulaire dans l'objet $article
+        //Elle permet aussi de faire des vérifications sur le formulaire
+        $form->handleRequest($superGlobals);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($vehicule);
+            $manager->flush();
+            $this->addFlash('success', $messageForm);
+            return $this->redirectToRoute('admin_vehicules');
+        }
+
+        return $this->renderForm("admin/vehicule_form.html.twig", [
+            'formVehicule' => $form,
+            'editMode' => $vehicule->getId() !== NULL
         ]);
     }
 }

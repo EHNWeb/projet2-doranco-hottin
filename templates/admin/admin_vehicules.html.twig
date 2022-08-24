@@ -4,53 +4,47 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h1 class="display-4 text-center my-4">BACKOFFICE</h1>
-		<h2 class="display-8 text-center my-4">Véhicule(s):
-			{{ vehicules|length }}</h2>
+    <div>
+        <h1 class="display-4 text-center my-4">BACKOFFICE</h1>
+        <h2 class="display-8 text-center my-4">Véhicule(s):
+            {{ vehicules|length }}</h2>
 
-		<a href="#" class="col-md-6 offset-md-3 btn btn-success mb-2">Ajouter un véhicule&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-car"></i>
-		</a>
-	</div>
-	<div>
-		<table class="table">
-			<thead>
-				<tr>
-					{% for data in colonnes %}
-						<th>{{ data }}</th>
-					{% endfor %}
-					<th colspan="3">Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for vehicule in vehicules %}
-					<tr>
-						<td>{{ vehicule.id }}</td>
-						<td>{{ vehhicule.titre }}</td>
-						<td>{{ vehhicule.marque }}</td>
-						<td>{{ vehhicule.modele }}</td>
-						<td>{{ vehicule.description|slice(0, 50)|raw }}</td>
-						<td><img src="{{ vehicule.photo }}" class="img-fluid" width="200" height="200"></td>
-						<td>{{ vehhicule.prix_journalier }}</td>
-						<td>{{ vehicule.date_enregistrement|date("d/m/Y à H:m:s") }}</td>
-						<td>
-							<a href="#" class="text-info">
-								<i class="fa-solid fa-eye"></i>
-							</a>
-						</td>
-						<td>
-							<a href="#" class="text-warning">
-								<i class="fa-solid fa-pen"></i>
-							</a>
-						</td>
-						<td>
-							<a href="#" class="text-danger">
-								<i class="fa-solid fa-trash-can"></i>
-							</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
+        <a href="#" class="col-md-6 offset-md-3 btn btn-success mb-2">Ajouter un véhicule&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-car"></i>
+        </a>
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    {% for data in colonnes %}
+                        <th>{{ data }}</th>
+                    {% endfor %}
+                    <th colspan="3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicule in vehicules %}
+                    <tr>
+                        <td>{{ vehicule.id }}</td>
+                        <td>{{ vehhicule.titre }}</td>
+                        <td>{{ vehhicule.marque }}</td>
+                        <td>{{ vehhicule.modele }}</td>
+                        <td>{{ vehicule.description|slice(0, 50)|raw }}</td>
+                        <td><img src="{{ vehicule.photo }}" class="img-fluid" width="200" height="200"></td>
+                        <td>{{ vehhicule.prix_journalier }}</td>
+                        <td>{{ vehicule.date_enregistrement|date("d/m/Y à H:m:s") }}</td>
+                        <td>
+                            <a href="#" class="text-info"><i class="fa-solid fa-eye"></i></a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-warning"><i class="fa-solid fa-pen"></i></a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-danger"><i class="fa-solid fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
