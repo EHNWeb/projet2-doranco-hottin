@@ -1,11 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AgencelocController!{% endblock %}
+{% block title %}Hello AgencelocController!
+{% endblock %}
 
 {% block body %}
 
-<div class="text-center">
-<p>Bienvenue à bord</p>
-<img src="{{ asset('images/accueil_voiture_location.png') }}" alt="" class="img-fluid">
-</div>
+	<div class="text-center">
+		<h1>Bienvenue à bord</h1>
+		<h6>Location de voiture 24h/24 et 7j/7</h6>
+		<img src="{{ asset('images/accueil_voiture_location.png') }}" alt="" class="img-fluid">
+	</div>
+	<div>
+		{{ form_start(formCommande, {
+            attr: {
+                novalidate: 'novalidate'
+            }
+            }) }}
+
+            {# FORM_WIDGET permet de gérer l'affichage d'un champ #}
+            {# FORM_ROW permet de gérer l'afficahge d'un champ et de son label #}
+            {{ form_row(formCommande.date_heure_depart, {
+                    label: "Départ",
+                }) }}
+            {{ form_row(formCommande.date_heure_fin, {
+                    label: "Fin",
+                }) }}
+                
+            <button type="submit" class="btn btn-primary mt-2"> Valider un véhicule</button>
+
+		{{ form_end(formCommande) }}
+    </div>
 {% endblock %}

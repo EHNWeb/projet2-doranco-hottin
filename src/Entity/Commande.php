@@ -18,13 +18,13 @@ class Commande
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=membre::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_membre;
 
     /**
-     * @ORM\ManyToOne(targetEntity=vehicule::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Vehicule::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_vehicule;
