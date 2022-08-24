@@ -73,4 +73,25 @@ class AdminController extends AbstractController
             'editMode' => $vehicule->getId() !== NULL
         ]);
     }
+
+    /**
+     * @Route("/admin/vehicule/delete/{id}", name="admin_delete_vehicule")
+     */
+    public function article_delete(EntityManagerInterface $manager, VehiculeRepository $repo, $id)
+    {
+        $vehicule = $repo->find($id);
+
+        // remove() prepare la suppression d'un article
+        $manager->remove($vehicule);
+
+        // Execution de la requete preparée
+        $manager->flush();
+
+        // addFlash() permet de créer un message de notification
+        // Le 1er argument est le type du message que l'on veut
+        // Le 2nd argument est le message
+        $this->addFlash('success', "Le véhicule n° $id a bien été supprimé !");
+
+        return $this->redirectToRoute("admin_vehicules");
+    }
 }
