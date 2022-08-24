@@ -34,7 +34,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/admin_vehicules.html.twig', [
             'vehicules' => $vehicules,
-            'colonnes' => $chapmsTableVehicule
+            'colonnes' => $chapmsTableVehicule,
         ]);
     }
 
@@ -94,4 +94,5 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute("admin_vehicules");
     }
+
 }
