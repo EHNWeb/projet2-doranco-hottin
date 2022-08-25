@@ -36,7 +36,9 @@
                         <td>{{ membre.prenom }}</td>
                         <td>{{ membre.email }}</td>
                         <td>{{ membre.civilite }}</td>
-                        <td>{{ membre.role }}</td>
+                        <td>
+                            {{ dump(membre.roles) }}
+                        </td>
                         <td>{{ membre.DateEnregistrement|date("d/m/Y  H:m:s") }}</td>
                         <td>
                             <a href="#" onclick="getElementById('windows{{ membre.id }}').style.display='';" class="text-info">
