@@ -38,6 +38,30 @@
                     <tr>
                         <td>{{ commande.id }}</td>
                         <td>
+                            {{ commande.IdMembre.id }} - {{ commande.IdMembre.nom }} - {{ commande.IdMembre.prenom}}
+                            <br>
+                            {{ commande.IdMembre.email }}
+                        </td>
+                        <td>
+                            <img src="{{ commande.IdVehicule.photo }}" class="img-fluid" width="100" height="100">  {{ commande.IdVehicule.id }} - {{ commande.IdVehicule.titre }}
+                        </td>
+                        <td>
+                            {{ commande.DateHeureDepart|date("d/m/Y") }}
+                            <br>
+                            {{ commande.DateHeureDepart|date("H") }}h{{ commande.DateHeureDepart|date("m") }}
+                        </td>
+                        <td>
+                            {{ commande.DateHeureFin|date("d/m/Y") }}
+                            <br>
+                            {{ commande.DateheureFin|date("H") }}h{{ commande.DateHeureFin|date("m") }}
+                        </td>
+                        <td>{{ commande.PrixTotal }} €</td>
+                        <td>
+                            {{ commande.DateEnregistrement|date("d/m/Y") }}
+                            <br>
+                            {{ commande.DateEnregistrement|date("H") }}h{{ commande.DateEnregistrement|date("m") }}
+                        </td>
+                        <td>
                             <a href="#" onclick="getElementById('windows{{ commande.id }}').style.display='';" class="text-info">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
@@ -59,14 +83,14 @@
                             </td>
                         </td>
                         <td>
-                            {# <a href="{{ path('admin_edit_commande', {id: membre.id}) }}" class="text-warning">
-                                <i class="fa-solid fa-pen"></i> #}
+                            <a href="{{ path('admin_edit_commande', {id: commande.id}) }}" class="text-warning">
+                                <i class="fa-solid fa-pen"></i>
                             </a>
                         </td>
                         <td>
-                            {# <a href="{{ path('admin_delete_commande', {id: commande.id}) }}" class="text-danger">
+                            <a href="{{ path('admin_delete_commande', {id: commande.id}) }}" class="text-danger">
                                 <i class="fa-solid fa-trash-can"></i>
-                            </a> #}
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

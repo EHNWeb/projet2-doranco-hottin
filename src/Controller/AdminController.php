@@ -234,4 +234,25 @@ class AdminController extends AbstractController
             'editMode' => $commande->getId() !== NULL
         ]);
     }
+
+        /**
+     * @Route("/admin/commande/delete/{id}", name="admin_delete_commande")
+     */
+    public function commande_delete(EntityManagerInterface $manager, CommandeRepository $repo, $id)
+    {
+        $commande = $repo->find($id);
+
+        // remove() prepare la suppression d'un article
+        $manager->remove($commande);
+
+        // Execution de la requete preparée
+        $manager->flush();
+
+        // addFlash() permet de créer un message de notification
+        // Le 1er argument est le type du message que l'on veut
+        // Le 2nd argument est le message
+        $this->addFlash('success', "La commande n° $id a bien été supprimée !");
+
+        return $this->redirectToRoute("admin_commandes");
+    }
 }
