@@ -1,39 +1,42 @@
 <section class="row article">
     <article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
         <h2>Détail commande</h2>
-        <h4>Id: {{ commande.id }}</h4>
+        <h4>N°: {{ commande.id }}</h4>
         <br>
         {# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
         <div class="metadata">
-            Ajouté le {{ membre.DateEnregistrement|date('d/m/Y à H:i:s') }}
+            Créée le {{ commande.DateEnregistrement|date('d/m/Y à H:i:s') }}
+            <br>
+            Départ: {{ commande.DateHeureDepart|date('d/m/Y à H:i:s') }}
+            <br>
+            Retour: {{ commande.DateHeureFin|date('d/m/Y à H:i:s') }}
         </div>
         <br>
         <div class="content">
-            {% if membre.civilite == 'm' %}
+            {% if commande.IdMembre.civilite == 'm' %}
                 Monsieur
             {% else %}
                 Madame
             {% endif %}
-            &nbsp;{{ membre.nom }}&nbsp;{{ membre.prenom }}
+            &nbsp;{{ commande.IdMembre.nom }}&nbsp;{{ commande.IdMembre.prenom }}
+            <br>
+            Id: {{ commande.IdMembre.id }} - Pseudo: {{ commande.IdMembre.pseudo }}
+            <br>
+            E-mail: {{ commande.IdMembre.email }}
+            <img class="img-fluid" src="{{ commande.IdVehicule.photo }}" alt="{{ commande.IdVehicule.titre }}">
+            {{ commande.IdVehicule.titre }}
+            <br>
+            Marque: {{ commande.IdVehicule.marque }}
+            <br>
+            Modèle: {{ commande.IdVehicule.modele }}
+            {{ commande.IdVehicule.description|raw }}
+            <br>
+            Prix {{ commande.IdVehicule.PrixJournalier }} € / jours
+            <br>
+            Prix Total: {{ commande.PrixTotal }} €
             <br>
             <br>
-            Pseudo: {{ membre.pseudo }}
-            <br>
-            E-mail: {{ membre.email }}
-            <br>
-            <br>
-            Statut:
-            {% if 'ROLE_ADMIN' in membre.roles %}
-                Admin
-                {% if 'ROLE_USER' in membre.roles %}
-                    &nbsp;et Membre
-                {% endif %}
-            {% else %}
-                Membre
-            {% endif %}
-            <br>
-            <br>
-            <a href="#" onclick="getElementById('windows{{ membre.id }}').style.display='none'" class="btn btn-sm btn-dark">
+            <a href="#" onclick="getElementById('windows{{ commande.id }}').style.display='none'" class="btn btn-sm btn-dark">
                 <i class="fa-solid fa-xmark"></i>
             </a>
         </div>

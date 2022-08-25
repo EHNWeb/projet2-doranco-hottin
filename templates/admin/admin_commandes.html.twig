@@ -68,7 +68,7 @@
                                 <div style="background:white;
                                     border: solid 1px black;
                                     width:400px;
-                                    height:400px;
+                                    height:800px;
                                     position:absolute;
                                     top:0;
                                     left:0;
@@ -78,7 +78,7 @@
                                     display:none;"
                                     id="windows{{ commande.id }}">
                                     {% set  commandeShow = commande.id %}
-                                    {# {% include('/admin/show_membre.html.twig') %} #}
+                                    {% include('/admin/show_commande.html.twig') %}
                                 </div>
                             </td>
                         </td>
