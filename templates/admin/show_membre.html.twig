@@ -2,18 +2,35 @@
     <article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
         <h2>Détail utilisateur</h2>
         <h4>Id: {{ membre.id }}</h4>
+        <br>
         {# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
         <div class="metadata">
             Ajouté le {{ membre.DateEnregistrement|date('d/m/Y à H:i:s') }}
         </div>
+        <br>
         <div class="content">
-            {{ membre.civilite }}&nbsp;{{ membre.nom }}&nbsp;{{ membre.prenom }}
+            {% if membre.civilite == 'm' %}
+                Monsieur
+            {% else %}
+                Madame
+            {% endif %}
+            &nbsp;{{ membre.nom }}&nbsp;{{ membre.prenom }}
+            <br>
             <br>
             Pseudo: {{ membre.pseudo }}
             <br>
             E-mail: {{ membre.email }}
             <br>
+            <br>
             Statut:
+            {% if 'ROLE_ADMIN' in membre.roles %}
+                Admin
+                {% if 'ROLE_USER' in membre.roles %}
+                    &nbsp;et Membre
+                {% endif %}
+            {% else %}
+                Membre
+            {% endif %}
             <br>
             <br>
             <a href="#" onclick="getElementById('windows{{ membre.id }}').style.display='none'" class="btn btn-sm btn-dark">

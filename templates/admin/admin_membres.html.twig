@@ -37,6 +37,9 @@
                         <td>
                             {% if 'ROLE_ADMIN' in membre.roles %}
                                 Admin
+                                {% if 'ROLE_USER' in membre.roles %}
+                                &nbsp;et Membre
+                                {% endif %}
                             {% else %}
                                 Membre
                             {% endif %}
@@ -59,7 +62,7 @@
                                 <div style="background:white;
                                     border: solid 1px black;
                                     width:400px;
-                                    height:600px;
+                                    height:400px;
                                     position:absolute;
                                     top:0;
                                     left:0;
