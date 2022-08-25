@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="text-center">
+    <h1>
+        {% if editMode %}
+            BACKOFFICE | Modification d'une commande
+        {% else %}
+            BACKOFFICE | Création d'une commande
+        {% endif %}
+    </h1>
+
+    {# FORM_START & FORM_END permettent de délimiter un formulaire , de modifier ses champs, changer la méthode, ... #}
+    {{ form_start(formCommande, {
+        attr: {
+            novalidate: 'novalidate'
+        }
+        })
+    }}
+
+    <table class="table">
+        <tr>
+            <td class="fw-bold" colspan="2">
+                {{ form_label(formCommande.id_membre, 'Pseudo')}}
+            </td>
+            <td class="fw-bold" colspan="2">
+                {{ form_label(formCommande.id_vehicule, 'Véhicule')}}
+            </td>
+        </tr>
+        <tr>
+            <td class="bg-secondary bg-opacity-10">
+                &nbsp;<i class="fa-solid fa-user fa-2x"></i>&nbsp;
+            </td>
+            <td>
+                {{ form_widget(formCommande.id_membre) }}
+            </td>
+            <td class="bg-secondary bg-opacity-10">
+                &nbsp;<i class="fa-solid fa-car fa-2x"></i>&nbsp;
+            </td>
+            <td>
+                {{ form_widget(formCommande.id_vehicule) }}
+            </td>
+        </tr>
+        <tr>
+            <td class="fw-bold" colspan="2">
+                {{ form_label(formCommande.date_heure_depart, 'Date et Heure de Départ')}}
+            </td>
+            <td class="fw-bold" colspan="2">
+                {{ form_label(formCommande.date_heure_fin, 'Date et Heure de Retour')}}
+            </td>
+        </tr>
+        <tr>
+            <td class="bg-secondary bg-opacity-10">
+                &nbsp;<i class="fa-solid fa-calendar-days fa-2x"></i>&nbsp;<i class="fa-solid fa-clock fa-2x"></i>&nbsp;
+            </td>
+            <td>
+                {{ form_widget(formCommande.date_heure_depart) }}
+            </td>
+            <td class="bg-secondary bg-opacity-10">
+                &nbsp;<i class="fa-solid fa-calendar-days fa-2x"></i>&nbsp;<i class="fa-solid fa-clock fa-2x"></i>&nbsp;
+            </td>
+            <td>
+                {{ form_widget(formCommande.date_heure_fin) }}
+            </td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-primary mt-2">
+        {% if editMode %}
+            Modifier
+        {% else %}
+            Enregistrer
+        {% endif %}
+    </button>
+
+    {{ form_end(formCommande) }}
+</div>
+{% endblock %}

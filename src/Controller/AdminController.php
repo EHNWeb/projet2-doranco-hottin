@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Membre;
+use App\Entity\Commande;
 use App\Entity\Vehicule;
 use App\Form\MembreType;
+use App\Form\CommandeType;
 use App\Form\VehiculeType;
 use App\Repository\MembreRepository;
+use App\Repository\CommandeRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -170,5 +173,65 @@ class AdminController extends AbstractController
         $this->addFlash('success', "Le compte utilisateur n° $id a bien été supprimé !");
 
         return $this->redirectToRoute("admin_membres");
+    }
+
+    /**
+     * @Route("/admin/commandes", name="admin_commandes")
+     */
+    public function admin_commandes(CommandeRepository $repo, EntityManagerInterface $manager): Response
+    {
+        // Récupération des nomd des champs de la table COMMANDES
+        $chapmsTableCommande = $manager->getClassMetadata(Commande::class)->getFieldNames();
+
+        // On récupère toutes les commandes
+        $commandes = $repo->findAll();
+
+        return $this->render('admin/admin_commandes.html.twig', [
+            'commandes' => $commandes,
+            'colonnes' => $chapmsTableCommande,
+        ]);
+    }
+
+        /**
+     * @Route("/admin/commande/new", name="admin_new_commande")
+     * @Route("/admin/commande/edit/{id}", name="admin_edit_commande")
+     */
+    // La classe REQUEST contient les données véhiculées par les super globales ($_POST, $_GET, ...)
+    public function commande_form(Request $superGlobals, EntityManagerInterface $manager, Commande $commande = null)
+    {
+        // L'objet MEMBRE recevra les données du formulaire
+        if (!$commande) {
+            $commande = new Commande();
+            $commande->setDateEnregistrement(new \DateTime());
+            $messageForm = "La commande a bien été crée !";
+        } else {
+            $messageForm = "La commande n° " . $commande->getId() . " a bien été modifiée !";
+        }
+
+        // CREATEFORM permet de récupérer un formulaire existant #}
+        $form = $this->createForm(CommandeType::class, $commande);
+
+        // HandleRequest permet d'insérer les données du formulaire dans l'objet $article
+        //Elle permet aussi de faire des vérifications sur le formulaire
+        $form->handleRequest($superGlobals);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $debutTimeStamp = $commande->getDateHeureDepart()->getTimestamp();
+            $finTimeStamp = $commande->getDateHeureFin()->getTimestamp();
+            $nbJour = ceil(($finTimeStamp - $debutTimeStamp)/60/60/24);
+
+            $prixTotal = $nbJour * $commande->getIdVehicule()->getPrixJournalier();
+            $commande->setPrixTotal(ceil($prixTotal));
+
+            $manager->persist($commande);
+            $manager->flush();
+            $this->addFlash('success', $messageForm);
+            return $this->redirectToRoute('admin_commandes');
+        }
+
+        return $this->renderForm("admin/commande_form.html.twig", [
+            'formCommande' => $form,
+            'editMode' => $commande->getId() !== NULL
+        ]);
     }
 }
