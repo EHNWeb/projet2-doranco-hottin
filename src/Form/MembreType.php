@@ -13,13 +13,11 @@ class MembreType extends AbstractType
     {
         $builder
             ->add('pseudo')
-            ->add('roles')
             ->add('password')
             ->add('nom')
             ->add('prenom')
             ->add('email')
             ->add('civilite')
-            ->add('date_enregistrement')
         ;
     }
 

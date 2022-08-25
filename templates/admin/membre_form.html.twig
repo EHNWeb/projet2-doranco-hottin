@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<h1>
+		{% if editMode %}
+			BACKOFFICE | Modification d'un compte utilisateur
+		{% else %}
+			BACKOFFICE | Création d'un compte utilisateur
+		{% endif %}
+	</h1>
+
+	{# FORM_START & FORM_END permettent de délimiter un formulaire , de modifier ses champs, changer la méthode, ... #}
+	{{ form_start(formMembre, {
+        attr: {
+            novalidate: 'novalidate'
+        }
+        })
+    }}
+
+	{# FORM_ROW permet de gérer l'afficahge d'un champ et de son label #}
+    {{ form_label(formMembre.pseudo, 'Pseudo')}}
+	{{ form_widget(formMembre.pseudo, {
+                attr: {
+                    placeholder: "Votre pseudo"
+                }
+            }) }}
+
+
+	<button type="submit" class="btn btn-primary mt-2">
+		{% if editMode %}
+			Modifier
+		{% else %}
+			Enregistrer
+		{% endif %}
+	</button>
+
+	{{ form_end(formMembre) }}
+
+{% endblock %}
