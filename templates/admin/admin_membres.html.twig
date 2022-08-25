@@ -22,7 +22,9 @@
             <thead>
                 <tr>
                     {% for data in colonnes %}
-                        <th>{{ data|capitalize|replace({'_': '&nbsp;'})|raw }}</th>
+                        {% if data != 'password' %}
+                            <th>{{ data|capitalize|replace({'_': '&nbsp;'})|raw }}</th>
+                        {% endif %}
                     {% endfor %}
                     <th colspan="3">Action</th>
                 </tr>
@@ -32,12 +34,22 @@
                     <tr>
                         <td>{{ membre.id }}</td>
                         <td>{{ membre.pseudo }}</td>
+                        <td>
+                            {% if 'ROLE_ADMIN' in membre.roles %}
+                                Admin
+                            {% else %}
+                                Membre
+                            {% endif %}
+                        </td>
                         <td>{{ membre.nom }}</td>
                         <td>{{ membre.prenom }}</td>
                         <td>{{ membre.email }}</td>
-                        <td>{{ membre.civilite }}</td>
                         <td>
-                            {{ dump(membre.roles) }}
+                            {% if membre.civilite == 'm' %}
+                                 Monsieur
+                            {% else %}
+                                Madame
+                            {% endif %}
                         </td>
                         <td>{{ membre.DateEnregistrement|date("d/m/Y  H:m:s") }}</td>
                         <td>
