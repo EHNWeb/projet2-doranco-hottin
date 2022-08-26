@@ -47,7 +47,22 @@
                         {{ vehicule.description|slice(0, 30)|raw }} ...
                         <br>
                         <br>
-                        <a href="#" class="btn btn-primary">Plus de détails&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></a>
+                        <a href="#" onclick="getElementById('windows{{ vehicule.id }}').style.display='';" class="btn btn-primary">Plus de détails&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></a>
+                        							<div style="background:white;
+								border: solid 1px black;
+								width:400px;
+								height:550px;
+								position:absolute;
+								top:0;
+								left:0;
+								right:0;
+								bottom:0;
+								margin: auto;
+								display:none;"
+								id="windows{{ vehicule.id }}">
+								{% set  vehiculeShow = vehicule.id %}
+								{% include('/agenceloc/show_vehicule.html.twig') %}
+							</div>
                     </div>
                 </article>
             {% endfor %}

@@ -1,0 +1,20 @@
+<section class="row article">
+    <article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
+        <h2>{{ vehicule.titre }}</h2>
+        <div class="content">
+            Marque: {{ vehicule.marque }}
+            <br>
+            Modèle: {{ vehicule.modele }}
+            <img class="img-fluid" src="{{ vehicule.photo }}" alt="{{ vehicule.titre }}">
+            {{ vehicule.description|raw }}
+            <br>
+            <br>
+            Prix {{ vehicule.PrixJournalier }} € / jours
+            <br>
+            <br>
+            <a href="#" onclick="getElementById('windows{{ vehicule.id }}').style.display='none'" class="btn btn-sm btn-dark">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+        </div>
+    </article>
+</section>
