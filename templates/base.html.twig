@@ -36,10 +36,10 @@
                         <a class="nav-link brand" aria-current="page" href="{{ path('app_agenceloc') }}">
                             <i class="fa-solid fa-house"></i>
                         </a>
-                        <a class="nav-link" href="#agencelocCatalogueVehicule">
+                        <a class="nav-link" href="{{ path('app_agenceloc') }}#agencelocCatalogueVehicule">
                             [ Nos voitures <i class="fa-solid fa-car"></i> ]
                         </a>
-                        <a class="nav-link" href="#agencelocReservationForm">
+                        <a class="nav-link" href="{{ path('app_agenceloc') }}#agencelocReservationForm">
                             [ Réservation <i class="fa-solid fa-key"></i> ]
                         </a>
                         {% if app.user is not null %}
@@ -52,7 +52,7 @@
                                     </a>
                                 {% endif %}
                             <div>
-                                <a class="nav-link" href="logout" class="text-danger">
+                                <a class="nav-link" href="/logout" class="text-danger">
                                     [ Déconnection <i class="fa-solid fa-arrow-right-from-bracket"></i> ]
                                 </a>
                             </div>
