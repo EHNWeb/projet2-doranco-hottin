@@ -15,13 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class AgencelocController extends AbstractController
 {
     /**
-     * @Route("/{shortMode}", name="app_agenceloc")
+     * @Route("/", name="app_agenceloc")
+     * @Route("/home/{shortMode}", name="app_agenceloc")
      */
     public function index(VehiculeRepository $repoVehicule, EntityManagerInterface $manager, Request $superGlobals, string $shortMode = 'ASC'): Response
     {
         // Création d'un objet commande
         $commande = new Commande();
-
         // $vehicules = $repoVehicule->findBy();
         $vehicules = $repoVehicule->findBy(array(), array('prix_journalier' => $shortMode));
 

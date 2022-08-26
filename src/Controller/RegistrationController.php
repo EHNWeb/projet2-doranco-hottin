@@ -41,9 +41,10 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
             $this->addFlash('success', $messageForm);
 
-            return $this->redirectToRoute('app_agenceloc');
+            return $this->redirectToRoute('app_agenceloc', [
+                'shortMode' => 'ASC'
+            ]);
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);

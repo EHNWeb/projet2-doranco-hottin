@@ -63,11 +63,15 @@
                 &nbsp;<i class="fa-solid fa-suitcase fa-2x"></i>&nbsp;
             </td>
             <td colspan="2">
+                {% if not editMode %}
                 {{ form_widget(formMembre.password, {
                     attr: {
                         placeholder: "Votre mot de passe"
                         }
                 }) }}
+                {% else %}
+                    <span class="fw-bold text-danger">Mot de passe non modifiable !</span>
+                {% endif %}
             </td>
             <td class="bg-secondary bg-opacity-10">
                 &nbsp;<i class="fa-solid fa-user fa-2x"></i><i class="fa-solid fa-user-gear fa-2x"></i>&nbsp;

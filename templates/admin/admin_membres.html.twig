@@ -82,9 +82,11 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ path('admin_delete_membre', {id: membre.id}) }}" class="text-danger">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
+                            {% if 'ROLE_ADMIN' not in membre.roles %}
+                                <a href="{{ path('admin_delete_membre', {id: membre.id}) }}" class="text-danger">
+                                    <i class="fa-solid fa-trash-can"></i>                                
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

@@ -36,30 +36,29 @@
                         <a class="nav-link brand" aria-current="page" href="{{ path('app_agenceloc') }}">
                             <i class="fa-solid fa-house"></i>
                         </a>
-                        <a class="nav-link" href="#agencelocCatalogueVehicule">[ Nos voitures <i class="fa-solid fa-car"></i> ]</a>
-                        <a class="nav-link" href="#agencelocReservationForm">[ Réservation <i class="fa-solid fa-key"></i> ]</a>
+                        <a class="nav-link" href="#agencelocCatalogueVehicule">
+                            [ Nos voitures <i class="fa-solid fa-car"></i> ]
+                        </a>
+                        <a class="nav-link" href="#agencelocReservationForm">
+                            [ Réservation <i class="fa-solid fa-key"></i> ]
+                        </a>
                         {% if app.user is not null %}
-                            <div>
-                                <a class="nav-link" href="#">Profil</a>
+                            <div class="nav-link">
+                                Bonjour {{ app.user.firstname }}
                             </div>
                             <div class="nav-link">
                                 {% if is_granted("ROLE_ADMIN") %}
                                     <a class="nav-link" href="#" ?>
-                                        <i class="fa-solid fa-user-gear"></i>
-                                    </a?<iclass="fa-solidfa-user">
-                            {% else %}
-                                </i>
-                            {% endif %}
-                            Bonjour
-                            {{ app.user.firstname }}</div>
-                        <div>
-                            <a class="nav-link" href="#" class="text-danger">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            </a>
-                        </div>
+                                        [ BackOffice <i class="fa-solid fa-user-gear"></i> ]
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <a class="nav-link" href="#" class="text-danger">[ Déconnection <i class="fa-solid fa-arrow-right-from-bracket"></i> ]</a>
+                            </div>
                     {% else %}
                         <div>
-                            <a class="nav-link" href="#" class="text-warning">
+                            <a class="nav-link" href="{{ path('app_register') }}" class="text-warning">
                                 [ Inscription <i class="fa-solid fa-user-plus"></i> ]
                             </a>
                         </div>
