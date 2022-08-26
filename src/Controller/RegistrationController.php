@@ -20,6 +20,10 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new Membre();
+        $user->setDateEnregistrement(new \DateTime());
+
+        $messageForm = "Le compte utilisateur a bien été crée !";
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -35,6 +39,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $this->addFlash('success', $messageForm);
 
             return $this->redirectToRoute('app_agenceloc');
         }

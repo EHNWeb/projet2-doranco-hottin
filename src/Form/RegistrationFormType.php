@@ -18,11 +18,19 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('pseudo')
+            ->add('nom')
+            ->add('prenom')
+            ->add('email')
+            ->add('civilite', ChoiceType::class, array(
+                'choices' => array(
+                    'Monsieur' => 'm',
+                    'Madame' => 'f')
+            ))
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez agréer nos termes.',
                     ]),
                 ],
             ])
@@ -33,11 +41,11 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer votre mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit avoir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
