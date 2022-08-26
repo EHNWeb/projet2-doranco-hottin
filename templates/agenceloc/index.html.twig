@@ -5,10 +5,12 @@
 
 {% block body %}
 
-	<div class="text-center">
-		<h1>Bienvenue à bord</h1>
-		<h6>Location de voiture 24h/24 et 7j/7</h6>
-		<img src="{{ asset('images/accueil_voiture_location.png') }}" alt="" class="img-fluid">
+	<div class="row">
+        <img src="{{ asset('images/accueil_location_voiture.jpg') }}" alt="" class="img-fluid">
+		<div  class="card-img-overlay mt-5 text-center text-danger">
+            <h1>Bienvenue à bord</h1>
+		    <h6>Location de voiture 24h/24 et 7j/7</h6>
+        </div>
 	</div>
 	<div id="agencelocReservationForm">
 		{{ form_start(formCommande, {
