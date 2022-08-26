@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AgencelocController extends AbstractController
 {
     /**
-     * @Route("/", name="app_agenceloc")
+     * @Route("/", name="home")
      * @Route("/home/{shortMode}", name="app_agenceloc")
      */
     public function index(VehiculeRepository $repoVehicule, EntityManagerInterface $manager, Request $superGlobals, string $shortMode = 'ASC'): Response

@@ -21,26 +21,35 @@ class Vehicule
 
     /**
      * @ORM\Column(type="string", length=200)
+     * @Assert\Length(min=2, max=200, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(min=2, max=50, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $marque;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(min=2, max=50, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $modele;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=200)
+     * @Assert\Length(min=2, max=200, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $photo;
 

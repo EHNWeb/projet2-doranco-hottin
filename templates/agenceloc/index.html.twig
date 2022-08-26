@@ -22,14 +22,13 @@
             {# FORM_WIDGET permet de gérer l'affichage d'un champ #}
             {# FORM_ROW permet de gérer l'afficahge d'un champ et de son label #}
             {{ form_row(formCommande.date_heure_depart, {
-                    label: "Départ",
+                    label: "Date et Heure de Départ",
                 }) }}
             {{ form_row(formCommande.date_heure_fin, {
-                    label: "Fin",
+                    label: "Date et heure de Retour",
                 }) }}
                 
             <button type="submit" class="btn btn-primary mt-2"> Chercher un véhicule</button>
-
 		{{ form_end(formCommande) }}
     </div>
 

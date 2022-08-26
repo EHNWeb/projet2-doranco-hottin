@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminController extends AbstractController
 {
@@ -123,15 +124,17 @@ class AdminController extends AbstractController
      * @Route("/admin/membre/edit/{id}", name="admin_edit_membre")
      */
     // La classe REQUEST contient les données véhiculées par les super globales ($_POST, $_GET, ...)
-    public function membre_form(Request $superGlobals, EntityManagerInterface $manager, Membre $membre = null)
+    public function membre_form(Request $superGlobals, EntityManagerInterface $manager, UserPasswordHasherInterface $userPasswordHasher, Membre $membre = null)
     {
         // L'objet MEMBRE recevra les données du formulaire
         if (!$membre) {
             $membre = new Membre();
             $membre->setDateEnregistrement(new \DateTime());
             $messageForm = "Le compte utilisateur a bien été crée !";
+            $newMembre = true;
         } else {
             $messageForm = "Le compte utilisateur n° " . $membre->getId() . " a bien été modifié !";
+            $newMembre = false;
         }
 
         // CREATEFORM permet de récupérer un formulaire existant #}
@@ -142,6 +145,15 @@ class AdminController extends AbstractController
         $form->handleRequest($superGlobals);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($newMembre) {
+                // encode the plain password
+                $membre->setPassword(
+                $userPasswordHasher->hashPassword(
+                        $membre,
+                        $form->get('password')->getData()
+                    )
+                );
+            }
             $manager->persist($membre);
             $manager->flush();
             $this->addFlash('success', $messageForm);

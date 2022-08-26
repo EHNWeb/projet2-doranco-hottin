@@ -23,6 +23,8 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Length(min=2, max=180, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $pseudo;
 
@@ -34,21 +36,29 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\Length(min=2, max=20, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\Length(min=2, max=20, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(min=5, max=50, minMessage="Il faut {{ limit }} caractères minimum !", maxMessage="Il faut au maximum {{ limit }} caractères !" )
+     * @Assert\Email(message = "L'adresse e-mail: {{ value }} n'est pas valide !")
+     * @Assert\NotBlank(message="Ce champ ne doit pas être vide !")
      */
     private $email;
 
