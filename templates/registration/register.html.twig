@@ -4,15 +4,90 @@
 
 {% block body %}
 
+<div class="text-center">
     <h1>Register</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <table class="table">
+            <tr>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.pseudo, 'Pseudo')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.plainPassword, 'Mot de passe')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.email, 'E-mail')}}
+                </td>
+            </tr>
+            <tr>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-user fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.pseudo, {
+                        attr: {
+                            placeholder: "Votre pseudo"
+                            }
+                    }) }}
+                </td>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-suitcase fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.plainPassword, {
+                        attr: {
+                            placeholder: "Votre mot de passe"
+                            }
+                    }) }}
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-envelope fa-2x"></i>&nbsp;
+                </td>
+                <td colspan="2">
+                    {{ form_widget(registrationForm.email, {
+                        attr: {
+                            placeholder: "Votre e-mail"
+                            }
+                    }) }}
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.civilite, 'Civilité')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.nom, 'Nom')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.prenom, 'Prenom')}}
+                </td>
+            </tr>
+            <tr>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-person-half-dress fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.civilite) }}
+                </td>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-pen fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.nom) }}
+                </td>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-pen fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.prenom) }}
+                </td>
+            </tr>
+        </table>
+        </div>
+
+        {{form_row(registrationForm.agreeTerms)}}
+        <button type="submit" class="btn btn-primary mt-2">S'inscrire</button>
     {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
