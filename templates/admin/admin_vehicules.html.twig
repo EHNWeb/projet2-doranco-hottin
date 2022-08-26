@@ -36,7 +36,7 @@
 						<td>{{ vehicule.modele }}</td>
 						<td>{{ vehicule.description|slice(0, 80)|raw }}
 							...</td>
-						<td><img src="{{ vehicule.photo }}" class="img-fluid" width="200" height="200"></td>
+						<td><img src="{{ vehicule.photo }}" class="img-fluid" width="200" height="200" alt="{{ vehicule.titre }}"></td>
 						<td>{{ vehicule.PrixJournalier }}
 							€</td>
 						<td>{{ vehicule.DateEnregistrement|date("d/m/Y à H:m:s") }}</td>

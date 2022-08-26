@@ -26,8 +26,32 @@
                     label: "Fin",
                 }) }}
                 
-            <button type="submit" class="btn btn-primary mt-2"> Valider un véhicule</button>
+            <button type="submit" class="btn btn-primary mt-2"> Chercher un véhicule</button>
 
 		{{ form_end(formCommande) }}
+    </div>
+
+    <div>
+    <h2 class="text-center">Nos voitures en agence</h2>
+        <section class="row articles">
+            {% for vehicule in vehicules %}
+                <article
+                    class="col-md-3 mx-auto text-center mb-3 p-3 mt-3 mr-1"> {# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
+                    <h2>{{ vehicule.titre }}</h2>
+                    {# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
+                    <div class="metadata">
+                        {{ vehicule.PrixJournalier }} € / jour
+                    </div>
+                    <div class="content">
+                        <img class="img-fluid" src="{{ vehicule.photo }}" alt="{{ vehicule.photo }}">
+                        {{ vehicule.description|slice(0, 30)|raw }} ...
+                        <br>
+                        <br>
+                        <a href="#" class="btn btn-primary">Plus de détails&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></a>
+                    </div>
+                </article>
+            {% endfor %}
+
+        </section>
     </div>
 {% endblock %}
