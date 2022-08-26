@@ -10,7 +10,7 @@
 		<h6>Location de voiture 24h/24 et 7j/7</h6>
 		<img src="{{ asset('images/accueil_voiture_location.png') }}" alt="" class="img-fluid">
 	</div>
-	<div>
+	<div id="agencelocReservationForm">
 		{{ form_start(formCommande, {
             attr: {
                 novalidate: 'novalidate'
@@ -32,7 +32,7 @@
     </div>
 
     <div>
-    <h2 class="text-center">Nos voitures en agence</h2>
+    <h2  id="agencelocCatalogueVehicule" class="text-center">Nos voitures en agence</h2>
         <section class="row articles">
             {% for vehicule in vehicules %}
                 <article
