@@ -47,12 +47,12 @@
                                 Bonjour {{ app.user.pseudo }}
                             </div>
                                 {% if is_granted("ROLE_ADMIN") %}
-                                    <a class="nav-link" href="#" ?>
+                                    <a class="nav-link" href="{{ path('app_admin') }}" ?>
                                         [ BackOffice <i class="fa-solid fa-user-gear"></i> ]
                                     </a>
                                 {% endif %}
                             <div>
-                                <a class="nav-link" href="app_logout" class="text-danger">
+                                <a class="nav-link" href="logout" class="text-danger">
                                     [ Déconnection <i class="fa-solid fa-arrow-right-from-bracket"></i> ]
                                 </a>
                             </div>
