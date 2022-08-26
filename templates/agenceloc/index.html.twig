@@ -32,41 +32,53 @@
     </div>
 
     <div>
-    <h2  id="agencelocCatalogueVehicule" class="text-center">Nos voitures en agence</h2>
-        <section class="row articles">
-            {% for vehicule in vehicules %}
-                <article
-                    class="col-md-3 mx-auto text-center mb-3 p-3 mt-3 mr-1"> {# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
-                    <h2>{{ vehicule.titre }}</h2>
-                    {# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
-                    <div class="metadata">
-                        {{ vehicule.PrixJournalier }} € / jour
-                    </div>
-                    <div class="content">
-                        <img class="img-fluid" src="{{ vehicule.photo }}" alt="{{ vehicule.photo }}">
-                        {{ vehicule.description|slice(0, 30)|raw }} ...
-                        <br>
-                        <br>
-                        <a href="#" onclick="getElementById('windows{{ vehicule.id }}').style.display='';" class="btn btn-primary">Plus de détails&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></a>
-                        							<div style="background:white;
-								border: solid 1px black;
-								width:400px;
-								height:550px;
-								position:absolute;
-								top:0;
-								left:0;
-								right:0;
-								bottom:0;
-								margin: auto;
-								display:none;"
-								id="windows{{ vehicule.id }}">
-								{% set  vehiculeShow = vehicule.id %}
-								{% include('/agenceloc/show_vehicule.html.twig') %}
-							</div>
-                    </div>
-                </article>
-            {% endfor %}
+    <h2  id="agencelocCatalogueVehicule" class="text-center">Nos {{ vehicules|length }} voitures en agence</h2>
+    <h4 class="text-center">
+        Prix 
+        {% if shortMode == 'ASC' %}
+            [ <i class="fa-solid fa-arrow-up-1-9"></i> ]
+            &nbsp;&nbsp;
+            <a href="{{ path('app_agenceloc', {shortMode: 'DESC'}) }}"><i class="fa-solid fa-arrow-down-9-1"></i></a>
+        {% else %}
+            <a href="{{ path('app_agenceloc', {shortMode: 'ASC'}) }}"><i class="fa-solid fa-arrow-up-1-9"></i></a>
+            &nbsp;&nbsp;
+            [ <i class="fa-solid fa-arrow-down-9-1"></i> ]
+        {% endif %}
+    </h4>
+    <section class="row articles">
+        {% for vehicule in vehicules %}
+            <article
+                class="col-md-3 mx-auto text-center mb-3 p-3 mt-3 mr-1"> {# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
+                <h2>{{ vehicule.titre }}</h2>
+                {# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
+                <div class="metadata">
+                    {{ vehicule.PrixJournalier }} € / jour
+                </div>
+                <div class="content">
+                    <img class="img-fluid" src="{{ vehicule.photo }}" alt="{{ vehicule.photo }}">
+                    {{ vehicule.description|slice(0, 30)|raw }} ...
+                    <br>
+                    <br>
+                    <a href="#" onclick="getElementById('windows{{ vehicule.id }}').style.display='';" class="btn btn-primary">Plus de détails&nbsp;&nbsp;<i class="fa-solid fa-eye"></i></a>
+                                                <div style="background:white;
+                            border: solid 1px black;
+                            width:400px;
+                            height:550px;
+                            position:absolute;
+                            top:0;
+                            left:0;
+                            right:0;
+                            bottom:0;
+                            margin: auto;
+                            display:none;"
+                            id="windows{{ vehicule.id }}">
+                            {% set  vehiculeShow = vehicule.id %}
+                            {% include('/agenceloc/show_vehicule.html.twig') %}
+                        </div>
+                </div>
+            </article>
+        {% endfor %}
 
-        </section>
+    </section>
     </div>
 {% endblock %}

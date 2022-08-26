@@ -15,13 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class AgencelocController extends AbstractController
 {
     /**
-     * @Route("/", name="app_agenceloc")
+     * @Route("/{shortMode}", name="app_agenceloc")
      */
-    public function index(VehiculeRepository $repoVehicule, EntityManagerInterface $manager, Request $superGlobals): Response
+    public function index(VehiculeRepository $repoVehicule, EntityManagerInterface $manager, Request $superGlobals, string $shortMode = 'ASC'): Response
     {
         // Création d'un objet commande
         $commande = new Commande();
-        $vehicules = $repoVehicule->findAll();
+
+        // $vehicules = $repoVehicule->findBy();
+        $vehicules = $repoVehicule->findBy(array(), array('prix_journalier' => $shortMode));
 
         // Création du formulaire en suivant la structure de SearchVehiculeType #}
         $form = $this->createForm(SearchVehiculeType::class, $commande);
@@ -32,7 +34,8 @@ class AgencelocController extends AbstractController
 
         return $this->render('agenceloc/index.html.twig', [
             'formCommande' => $form->createView(),
-            'vehicules' => $vehicules
+            'vehicules' => $vehicules,
+            'shortMode' => $shortMode
         ]);
     }
 }
