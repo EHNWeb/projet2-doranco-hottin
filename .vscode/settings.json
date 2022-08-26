@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MySQL",
+            "connectString": "mysql://qo4vbnroivuh0i82:bjnhkft2sa6slwc0@oliadkuxrl9xdugh.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/cfxl37r8hdkm8y8q",
+            "name": "qo4vbnroivuh0i82"
+        }
+    ]
+}
